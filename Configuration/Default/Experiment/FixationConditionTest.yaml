@@ -1,0 +1,171 @@
+ID: FixationConditionTest
+Name: FixationConditionTest
+Designer: Alex
+Experimenter: KS
+Log: Right Eye
+Subject_ID: AG8
+Subject_Name: Dunn
+Subject_Species: Macaque
+Subject_Gender: Male
+Subject_Birth: ''
+Subject_Size: 0 0 0
+Subject_Weight: 27
+Subject_Log: 
+EnvPath: FixationShowroom
+EnvParam:
+  FixDotPosition@FixDot@FixDot: -3 3 0
+  FixDotDiameter@FixDot@FixDot: 2
+  FixDotInnerRadius@FixDot@FixDot: 0.25
+  FixDotOuterRadius@FixDot@FixDot: 0.5
+  FixDotInnerColor@FixDot@FixDot: 0 0 0 1
+  FixDotOuterColor@FixDot@FixDot: 1 1 1 1
+  FixDotVisible@FixDot@FixDot: true
+  Show@Showroom@FixDot/Showroom: Plaid
+  CameraPosition@OrthoCamera@OrthoCamera: 0 0 -501
+  ScreenToEye@OrthoCamera@OrthoCamera: 57
+  ScreenHeight@OrthoCamera@OrthoCamera: 33
+  ScreenAspect@OrthoCamera@OrthoCamera: 2.285714
+  BGColor@OrthoCamera@OrthoCamera: 0.5 0.5 0.5 1
+  CLUT@OrthoCamera@OrthoCamera: false
+  MarkerSize@Marker@OrthoCamera/Marker: 4
+  MarkerCorner@Marker@OrthoCamera/Marker: TopLeft
+  Mark@Marker@OrthoCamera/Marker: false
+  TagSize@Tag@OrthoCamera/Tag0: 2
+  TagMargin@Tag@OrthoCamera/Tag0: 2
+  TagID@Tag@OrthoCamera/Tag0: tag25_09_00000
+  TagCorner@Tag@OrthoCamera/Tag0: BottomLeft
+  TagSize@Tag@OrthoCamera/Tag1: 2
+  TagMargin@Tag@OrthoCamera/Tag1: 2
+  TagID@Tag@OrthoCamera/Tag1: tag25_09_00000
+  TagCorner@Tag@OrthoCamera/Tag1: BottomLeft
+  TagSize@Tag@OrthoCamera/Tag2: 2
+  TagMargin@Tag@OrthoCamera/Tag2: 2
+  TagID@Tag@OrthoCamera/Tag2: tag25_09_00000
+  TagCorner@Tag@OrthoCamera/Tag2: BottomLeft
+  TagSize@Tag@OrthoCamera/Tag3: 2
+  TagMargin@Tag@OrthoCamera/Tag3: 2
+  TagID@Tag@OrthoCamera/Tag3: tag25_09_00000
+  TagCorner@Tag@OrthoCamera/Tag3: BottomLeft
+  Rotation@Plaid@FixDot/Plaid: 0 0 0
+  RotationOffset@Plaid@FixDot/Plaid: 0 0 0
+  Ori0@Plaid@FixDot/Plaid: 0
+  OriOffset0@Plaid@FixDot/Plaid: 0
+  Ori1@Plaid@FixDot/Plaid: -90
+  OriOffset1@Plaid@FixDot/Plaid: 0
+  Size@Plaid@FixDot/Plaid: 1 1 1
+  Diameter@Plaid@FixDot/Plaid: 1
+  MaskType@Plaid@FixDot/Plaid: None
+  MaskRadius@Plaid@FixDot/Plaid: 0.5
+  MaskSigma@Plaid@FixDot/Plaid: 0.15
+  MaskReverse@Plaid@FixDot/Plaid: false
+  Luminance@Plaid@FixDot/Plaid: 0.5
+  Contrast@Plaid@FixDot/Plaid: 1
+  SpatialFreq0@Plaid@FixDot/Plaid: 0.2
+  SpatialFreq1@Plaid@FixDot/Plaid: 0.2
+  TemporalFreq0@Plaid@FixDot/Plaid: 1
+  TemporalFreq1@Plaid@FixDot/Plaid: 1
+  ModulateTemporalFreq0@Plaid@FixDot/Plaid: 0.2
+  ModulateTemporalFreq1@Plaid@FixDot/Plaid: 0.2
+  ModulateTemporalPhase0@Plaid@FixDot/Plaid: 0
+  ModulateTemporalPhase1@Plaid@FixDot/Plaid: 0
+  SpatialPhase0@Plaid@FixDot/Plaid: 0
+  SpatialPhase1@Plaid@FixDot/Plaid: 0
+  MinColor@Plaid@FixDot/Plaid: 0 0 0 1
+  MaxColor@Plaid@FixDot/Plaid: 1 1 1 1
+  PauseTime@Plaid@FixDot/Plaid: false
+  PauseModulateTime@Plaid@FixDot/Plaid: true
+  GratingType0@Plaid@FixDot/Plaid: Square
+  GratingType1@Plaid@FixDot/Plaid: Square
+  ModulateType0@Plaid@FixDot/Plaid: Square
+  ModulateType1@Plaid@FixDot/Plaid: Square
+  ReverseTime@Plaid@FixDot/Plaid: false
+  Duty0@Plaid@FixDot/Plaid: 0.5
+  Duty1@Plaid@FixDot/Plaid: 0.5
+  ModulateDuty0@Plaid@FixDot/Plaid: 0.5
+  ModulateDuty1@Plaid@FixDot/Plaid: 0.5
+  TimeSecond@Plaid@FixDot/Plaid: 0
+  ModulateTimeSecond@Plaid@FixDot/Plaid: 0
+  RotPositionOffset@Plaid@FixDot/Plaid: false
+  PositionOffset@Plaid@FixDot/Plaid: 0 0 0
+  Position@Plaid@FixDot/Plaid: 0 0 0
+  Visible@Plaid@FixDot/Plaid: true
+CondPath: Condition\Ori[12]_SF[5].yaml
+Cond: 
+LogicPath: FixationCondTest
+Hemisphere: Left
+Eye: Both
+RecordSession: ''
+RecordSite: Full
+DataDir: I:\
+DataPath: 
+Input: true
+CondSampling: UniformWithoutReplacement
+BlockSampling: UniformWithoutReplacement
+CondRepeat: 1
+BlockRepeat: 1
+BlockFactor: []
+PreICI: 250
+CondDur: 250
+SufICI: 0
+PreITI: 427
+TrialDur: 0
+SufITI: 682
+PreIBI: 0
+BlockDur: 0
+SufIBI: 0
+PushCondAtState: COND
+CondTestAtState: PREITI
+NotifyPerCondTest: 0
+NotifyParam:
+  - CondIndex
+  - Event
+  - SyncEvent
+InheritParam:
+  - Experimenter
+  - Subject_ID
+  - Hemisphere
+  - RecordSession
+  - RecordSite
+  - DataDir
+  - Subject_Name
+  - Subject_Species
+  - Subject_Gender
+  - Subject_Birth
+  - Subject_Size
+  - Subject_Weight
+EnvInheritParam:
+  - ScreenToEye@OrthoCamera@OrthoCamera
+  - ScreenHeight@OrthoCamera@OrthoCamera
+  - ScreenAspect@OrthoCamera@OrthoCamera
+  - MarkerSize@Marker@Marker~OrthoCamera
+  - MarkerCorner@Marker@Marker~OrthoCamera
+  - MarkerSize@Marker@OrthoCamera/Marker
+  - MarkerCorner@Marker@OrthoCamera/Marker
+  - CLUT@OrthoCamera@OrthoCamera
+TimerDriftSpeed: 6.5E-05
+EventSyncProtocol:
+  Routes:
+    - DigitalOut
+    - Display
+  NChannel: 1
+  NEdgePEvent: 1
+Display_ID: ROGPG279Q
+CondTestShow: ALL
+NotifyExperimenter: true
+Version: 3
+Config: 
+CondTest: 
+ExtendParam:
+  MinPreITIDur: 250
+  MaxPreITIDur: 500
+  MinSufITIDur: 500
+  MaxSufITIDur: 1000
+  MinFixDur: 1000
+  MaxFixDur: 2000
+  WaitForFixTimeOut: 3000
+  FixRadius: 5
+  DotScaleOnFix: 0.7
+  EyeMoveRadius: 30
+  FixDotPosition:
+    - -3 3 0
+  FixPreDur: 200

@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UI.uss?fileID=7433441132597879392&amp;guid=cb14c02e72197c24c8c495b1dbfa58c6&amp;type=3#UI" />
+    <ui:VisualElement name="ConditionTestPanel" class="Panel">
+        <ui:Label text="ConditionTest" name="Title" class="title" />
+        <ui:VisualElement name="HeaderContainer" class="header-container">
+            <ui:Label text="CondTestIndex" name="CondTestIndexHeader" class="header" />
+            <ui:Label text="CondIndex" name="CondIndexHeader" class="header" />
+            <ui:Label text="CondRepeat" name="CondRepeatHeader" class="header" />
+            <ui:Label text="BlockIndex" name="BlockIndexHeader" class="header" />
+            <ui:Label text="BlockRepeat" name="BlockRepeatHeader" class="header" />
+        </ui:VisualElement>
+        <ui:MultiColumnListView name="Content" class="content" />
+        <ui:VisualElement name="StatusBar" class="status-bar">
+            <ui:Label text="Hit: 0%" name="HitRateLabel" class="hit-rate-label" />
+            <ui:Button text="Clear" name="ClearButton" class="condition-test-clear-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

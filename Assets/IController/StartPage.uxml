@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/IController/MainMenu.uss?fileID=7433441132597879392&amp;guid=2b0cd2749b071294b92631c17e0ab056&amp;type=3#MainMenu" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label text="Main Menu" name="Label" class="header" />
+        <ui:Button text="Button" name="EnterKeyBoard" style="margin-top: 20px; width: 800px; align-self: center;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,627 @@
+.Main {
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.MainMenu {
+    flex-shrink: 0;
+    height: 50px;
+    flex-direction: row;
+    background-color: rgb(200, 200, 200);
+}
+
+.MainMenuButton {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(140, 140, 140);
+    border-right-color: rgb(140, 140, 140);
+    border-top-color: rgb(140, 140, 140);
+    border-bottom-color: rgb(140, 140, 140);
+    background-color: rgb(210, 210, 210);
+    -unity-text-align: middle-center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+    padding-top: 10;
+    padding-bottom: 10;
+    padding-left: 12;
+    padding-right: 12;
+    font-size: 34;
+    -unity-font-style: bold;
+    text-overflow: ellipsis;
+}
+
+.MainMenuButton:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.MainMenuToggle {
+    background-color: rgb(210, 210, 210);
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+    padding-top: 8;
+    padding-bottom: 8;
+    padding-left: 10;
+    padding-right: 10;
+    font-size: 34;
+    -unity-font-style: bold;
+    text-overflow: ellipsis;
+}
+
+.MainContent {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.ParamName {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgb(190, 190, 190);
+    -unity-text-align: middle-center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-overflow: ellipsis;
+}
+
+.ParamButton {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(140, 140, 140);
+    border-right-color: rgb(140, 140, 140);
+    border-top-color: rgb(140, 140, 140);
+    border-bottom-color: rgb(140, 140, 140);
+    background-color: rgb(205, 205, 205);
+    -unity-text-align: middle-center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-overflow: ellipsis;
+}
+
+.Dropdown > VisualElement{
+    margin-left: 0px;
+}
+
+.CloseButton {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    width: 45px;
+    background-color: rgb(150, 150, 150);
+    height: 45px;
+    font-size: 35px;
+    -unity-font-style: bold;
+}
+
+.CloseButton:hover {
+    background-color: rgb(200, 30, 30);
+}
+
+.ToggleButton > VisualElement {
+    display: none;
+}
+
+.ToggleButton > Label {
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ToggleButton {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(140, 140, 140);
+    border-right-color: rgb(140, 140, 140);
+    border-top-color: rgb(140, 140, 140);
+    border-bottom-color: rgb(140, 140, 140);
+    background-color: rgb(205, 205, 205);
+    -unity-text-align: middle-center;
+}
+
+.ToggleButtonOrange:hover {
+    background-color: rgb(178, 155, 71);
+}
+
+.ToggleButtonOrange:checked {
+    background-color: rgb(217, 182, 54);
+}
+
+.ToggleButtonPurple:hover {
+    background-color: rgb(125, 72, 204);
+}
+
+.ToggleButtonPurple:checked {
+    background-color: rgb(140, 64, 255);
+}
+
+.ToggleButtonRed:hover {
+    background-color: rgb(191, 76, 76);
+}
+
+.ToggleButtonRed:checked {
+    background-color: rgb(229, 57, 57);
+}
+
+.ToggleButtonGreen:hover {
+    background-color: rgb(105, 178, 62);
+}
+
+.ToggleButtonGreen:checked {
+    background-color: rgb(108, 204, 51);
+}
+
+.ToggleButtonBlue:hover {
+    background-color: rgb(76, 100, 255);
+}
+
+.ToggleButtonBlue:checked {
+    background-color: rgb(102, 123, 255);
+}
+
+.ToggleButtonBool {
+    background-color: rgb(185, 185, 185);
+}
+
+.ToggleButtonBool:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.Vector Label {
+    display: none;
+}
+
+.Vector > VisualElement {
+    flex-direction: row;
+}
+
+.Viewport {
+    border-width: 1px;
+    border-color: rgb(220, 220, 220);
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.Viewport > #Content {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.Viewport > #Client {
+    position: Absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 6;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 30;
+    -unity-font-style: bold;
+    -unity-text-align: top-left;
+    color: rgb(255, 255, 255);
+}
+
+.Panel {
+    background-color: rgb(190, 190, 190);
+    border-width: 1px;
+    border-color: #444444;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 1px;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    -unity-font-style: bold;
+}
+
+.Panel > Label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 10px;
+    height: 50px;
+    background-color: rgb(150, 150, 150);
+    font-size: 40;
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.Panel > ScrollView {
+    flex-grow: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Panel > ScrollView .unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Panel > #Status {
+    background-color: rgb(140, 140, 140);
+    height: 46px;
+    flex-direction: row;
+    flex-shrink: 0;
+}
+
+.Param {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-shrink: 0;
+    width: 50%;
+    height: 45px;
+}
+
+.Param > #Name {
+    font-size: 30;
+    -unity-font-style: bold;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.Param > #Value {
+    font-size: 30;
+    -unity-font-style: bold;
+    flex-shrink: 1;
+    flex-grow: 1;
+    -unity-text-align: middle-left;
+}
+
+.unity-enum-field__input {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.unity-base-text-field__input {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.unity-composite-field__field {
+    flex-grow: 1;
+    margin-top: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    margin-left: 1px;
+}
+
+.ParamsFoldout {
+    width: 100%;
+}
+
+.ParamsFoldout > Toggle {
+    font-size: 32;
+    -unity-font-style: bold;
+}
+
+.ParamsFoldout > .unity-foldout__content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 0;
+}
+
+/* .tab-container {
+    flex-direction: row;
+    padding: 0;
+    border-bottom-width: 1px;
+    border-bottom-color: #444444;
+    background-color: rgb(190, 190, 190);
+    margin-bottom: 2px;
+}
+
+.tab-button {
+    margin-right: 2px;
+    padding: 8px 16px;
+    background-color: rgb(220, 220, 220);
+    border-width: 1px;
+    border-color: #444444;
+    border-bottom-width: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    width: 200px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: #000000;
+    -unity-font-weight: 800; 
+    -unity-text-align: middle-center;
+}
+
+.tab-button:hover {
+    background-color: rgb(240, 240, 240);
+    color: rgb(0, 0, 0);
+}
+
+.tab-button.active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 8px;
+    background-color: rgb(190, 190, 190);
+    border-width: 1px;
+    border-color: #444444;
+    border-top-width: 0;
+}
+
+.status {
+    height: 36px;
+    border-top-width: 1px;
+    border-top-color: #444444;
+    padding: 8px;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: rgb(190, 190, 190);
+}
+
+.clear-button {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    background-color: rgb(42, 149, 220);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    width: 150px;
+    height: 40px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color:rgb(255, 255, 255);
+    -unity-font-weight: 800; 
+    -unity-text-align: middle-center;
+    margin-bottom: 0px; 
+    margin-right: 10px;
+}
+
+.clear-button:hover {
+    background-color: rgb(7, 63, 116);
+    color: rgb(255, 255, 255);
+}
+
+
+.clear-button {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.clear-button:active {
+    box-shadow: 0 1px 2px rgba(146, 194, 214, 0.2);
+} */
+
+.condition-test-clear-button {
+    background-color: rgb(42, 149, 220);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    width: 150px;
+    height: 40px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color:rgb(255, 255, 255);
+    -unity-font-weight: 800; /* 最大加粗级别 */
+    -unity-text-align: middle-center;
+    margin-left: auto;
+}
+
+.header-container {
+    flex-direction: row;
+    min-height: 40px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.header {
+    flex-grow: 0;
+    width: 180px;
+    font-size: 25px;
+    -unity-font-style-and-weight: bold;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -unity-text-align: middle-center;
+}
+
+#CondTestIndexHeader {
+    background-color: rgb(204, 102, 102);
+}
+
+#CondIndexHeader {
+    background-color: rgb(102, 204, 102);
+}
+
+#CondRepeatHeader {
+    background-color: rgb(102, 102, 204);
+}
+
+#BlockIndexHeader {
+    background-color: rgb(204, 204, 102);
+}
+
+#BlockRepeatHeader {
+    background-color: rgb(204, 102, 204);
+}
+
+.console-panel {
+    flex-grow: 1;
+    flex-direction: column;
+    background-color: rgb(190, 190, 190);
+    padding: 5px;
+    border-width: 1px;
+    border-color: #444444;
+    border-top-width: 0;
+}
+
+.console-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(150, 150, 150);
+    border-bottom-width: 1px;
+    border-bottom-color: #444444;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 10px;
+    padding-bottom: 0;
+    padding-left: 10px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.title {
+    color: rgb(30, 30, 30);
+    font-size: 40px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.tab-buttons-container {
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.tab-button {
+    margin-right: 8px;
+    padding: 5px 10px;
+    background-color: rgb(70, 70, 70);
+    border-width: 1px;
+    border-color: #666666;
+    color: rgb(200, 200, 200);
+    font-size: 20px;
+    -unity-font-style: bold;
+    transition-duration: 0.2s;
+    height: 45px;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.tab-button:hover {
+    background-color: rgb(100, 100, 100);
+}
+
+.tab-button:active {
+    background-color: rgb(140, 140, 140);
+}
+
+.tab-button.active {
+    background-color: rgb(42, 149, 220);
+}
+
+.clear-button {
+    margin-left: auto;
+    background-color: rgb(42, 149, 220);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 32px;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.clear-button:hover {
+    background-color: rgb(7, 63, 116);
+    color: rgb(255, 255, 255);
+}
+
+.clear-button:active {
+    box-shadow: 0 1px 2px rgba(146, 194, 214, 0.2);
+}
+
+.log-content {
+    flex-grow: 1;
+    background-color: rgb(190, 190, 190);
+    padding: 5px;
+    border-width: 1px;
+    border-color: #444444;
+    border-top-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+.status-bar {
+    height: 50px;
+    border-top-width: 1px;
+    border-top-color: #444444;
+    padding: 8px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(190, 190, 190) !important;
+    flex-shrink: 0;
+}
+
+.status-text {
+    color: rgb(30, 30, 30);
+    font-size: 25px;
+    -unity-font-style: bold;
+    flex-shrink: 0;
+    -unity-text-align: middle-center;
+    align-self: center;
+}
+
+.hit-rate-label {
+    color: rgb(30, 30, 30);
+    font-size: 25px;
+    -unity-font-style: bold;
+    flex-shrink: 0;
+    -unity-text-align: middle-left;
+    align-self: center;
+}
