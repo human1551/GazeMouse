@@ -3,8 +3,8 @@ Name: FixationConditionTest
 Designer: Alex
 Experimenter: KS
 Log: Right Eye
-Subject_ID: AG8
-Subject_Name: Dunn
+Subject_ID: lx
+Subject_Name: lixing
 Subject_Species: Macaque
 Subject_Gender: Male
 Subject_Birth: ''
@@ -23,12 +23,12 @@ EnvParam:
   Show@Showroom@FixDot/Showroom: Plaid
   CameraPosition@OrthoCamera@OrthoCamera: 0 0 -501
   ScreenToEye@OrthoCamera@OrthoCamera: 57
-  ScreenHeight@OrthoCamera@OrthoCamera: 33
+  ScreenHeight@OrthoCamera@OrthoCamera: 30
   ScreenAspect@OrthoCamera@OrthoCamera: 2.285714
   BGColor@OrthoCamera@OrthoCamera: 0.5 0.5 0.5 1
-  CLUT@OrthoCamera@OrthoCamera: false
-  MarkerSize@Marker@OrthoCamera/Marker: 4
-  MarkerCorner@Marker@OrthoCamera/Marker: TopLeft
+  CLUT@OrthoCamera@OrthoCamera: true
+  MarkerSize@Marker@OrthoCamera/Marker: 2
+  MarkerCorner@Marker@OrthoCamera/Marker: BottomLeft
   Mark@Marker@OrthoCamera/Marker: false
   TagSize@Tag@OrthoCamera/Tag0: 2
   TagMargin@Tag@OrthoCamera/Tag0: 2
@@ -96,7 +96,7 @@ Hemisphere: Left
 Eye: Both
 RecordSession: ''
 RecordSite: Full
-DataDir: I:\
+DataDir: X:/
 DataPath: 
 Input: true
 CondSampling: UniformWithoutReplacement

@@ -180,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 2507716089119070283, guid: 22db92470b7d6b54da0a2dd327f41b40,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6825456482601445969, guid: 22db92470b7d6b54da0a2dd327f41b40,
         type: 3}
@@ -195,8 +195,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7141160817062939842, guid: 22db92470b7d6b54da0a2dd327f41b40,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 579360668}
   m_SourcePrefab: {fileID: 100100000, guid: 22db92470b7d6b54da0a2dd327f41b40, type: 3}
+--- !u!1 &579360667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7141160817062939842, guid: 22db92470b7d6b54da0a2dd327f41b40,
+    type: 3}
+  m_PrefabInstance: {fileID: 423036337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &579360668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579360667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d356b6bca303e41a81e4a74a3a9311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Experica.Command::MultiButtonColorHandler
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  pressColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &1221989243
 PrefabInstance:
   m_ObjectHideFlags: 0

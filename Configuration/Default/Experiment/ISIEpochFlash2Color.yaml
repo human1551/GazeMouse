@@ -3,8 +3,8 @@ Name: ISIEpochFlash2Color
 Designer: Alex
 Experimenter: KS
 Log: 
-Subject_ID: AG7
-Subject_Name: DAQ1
+Subject_ID: lx
+Subject_Name: lixing
 Subject_Species: Macaque
 Subject_Gender: Male
 Subject_Birth: ''
@@ -38,10 +38,10 @@ CondPath: ''
 Cond: 
 LogicPath: ImagerEpochNoBlank
 Hemisphere: Left
-Eye: Right
+Eye: Both
 RecordSession: ''
 RecordSite: Full
-DataDir: I:\
+DataDir: D:/
 DataPath: 
 Input: false
 CondSampling: Ascending
@@ -102,7 +102,7 @@ EventSyncProtocol:
   NEdgePEvent: 1
 Display_ID: ROGPG279Q
 CondTestShow: ALL
-NotifyExperimenter: false
+NotifyExperimenter: true
 Version: 3
 Config: 
 CondTest: 

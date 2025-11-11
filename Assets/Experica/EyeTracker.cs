@@ -74,10 +74,10 @@ namespace Experica
             CancellationTokenSource cts = new();
             CircularBuffer<Vector2> gazes = new(30);
 
-            private float _lastConfidence = -1f; // 初始值设为无效值（置信度范围通常是0~1）
-            private bool? _isRising = null; // 记录当前趋势：true=上升，false=下降，null=未初始化
+            private float _lastConfidence = -1f; 
+            private bool? _isRising = null; 
 
-            private float _currentConfidence; // 存储当前置信度
+            private float _currentConfidence; 
             public float Confidence => _currentConfidence;
             // 添加左右眼置信度跟踪
             private float _leftEyeLastConfidence = -1f;
@@ -87,10 +87,15 @@ namespace Experica
             private bool _leftBlinkTriggered = false;
             private bool _rightBlinkTriggered = false;
 
+            public event Action LeftEyeBlinked;
+            public event Action RightEyeBlinked;
+            private DateTime _lastLeftBlinkTime = DateTime.MinValue;
+            private DateTime _lastRightBlinkTime = DateTime.MinValue;
             private DateTime? _leftBlinkTime = null;
             private DateTime? _rightBlinkTime = null;
-            private readonly TimeSpan _blinkIntervalThreshold = TimeSpan.FromMilliseconds(100); // 双眼眨眼间隔阈值
-
+            private readonly TimeSpan _blinkIntervalMin = TimeSpan.FromMilliseconds(100);
+            [SerializeField] private readonly TimeSpan _blinkIntervalThreshold = TimeSpan.FromMilliseconds(100); // 双眼眨眼间隔阈值
+            //private readonly TimeSpan _blinkSyncThreshold = TimeSpan.FromSeconds(1);
             public void Dispose()
             {
                 Dispose(true);
@@ -217,11 +222,8 @@ namespace Experica
             {
                 Debug.Log($"置信度下降: {previous:F2} → {current:F2}");
             }
-            /// <summary>
-            /// 检查置信度是否满足“先降后升”的序列条件
-            /// </summary>
-            /// <param name="currentConfidence">当前置信度</param>
-            private void CheckConfidenceSequence(float currentConfidence)
+            
+            /*private void CheckConfidenceSequence(float currentConfidence)
             {
                 // 第一步：检测是否下降到30%以下
                 if (currentConfidence < FALL_THRESHOLD)
@@ -240,12 +242,12 @@ namespace Experica
                     // 重置状态，准备下一次检测
                     _hasFallenBelowThreshold = false;
                 }
-            }
+            }*/
 
             //检测两次“鼠标点击”事件的间隔，小于指定则判定为一次双击
-            private DateTime _lastClickTime = DateTime.MinValue;
-            private readonly TimeSpan _doubleClickInterval = TimeSpan.FromMilliseconds(500); // 双击间隔时间（可调整）
-            private void CheckDoubleClick()
+            //private DateTime _lastClickTime = DateTime.MinValue;
+            //private readonly TimeSpan _doubleClickInterval = TimeSpan.FromMilliseconds(500); // 双击间隔时间（可调整）
+            /*private void CheckDoubleClick()
             {
                 if (DateTime.Now - _lastClickTime < _doubleClickInterval)
                 {
@@ -261,7 +263,7 @@ namespace Experica
                 }
                 // 更新最后一次点击时间
                 _lastClickTime = DateTime.Now;
-            }
+            }*/
 
             //左键。不检测双眼同时闭上（减少误操作)，只分别检测两只眼睛的置信度变化
             //base_data里的pupil.0和pupil.1数据……
@@ -277,7 +279,7 @@ namespace Experica
                         // 左眼处理：检查眨眼模式
                         if (_leftEyeLastConfidence >= 0)
                         {
-                            CheckEyeBlink(
+                            CheckBlink(
                                 currentConfidence,
                                 _leftEyeLastConfidence,
                                 ref _leftHasFallenBelowThreshold,
@@ -292,7 +294,7 @@ namespace Experica
                         // 右眼处理：检查眨眼模式
                         if (_rightEyeLastConfidence >= 0)
                         {
-                            CheckEyeBlink(
+                            CheckBlink(
                                 currentConfidence,
                                 _rightEyeLastConfidence,
                                 ref _rightHasFallenBelowThreshold,
@@ -306,41 +308,12 @@ namespace Experica
             }
 
 
-            // 检查单眼眨眼模式并触发相应鼠标事件
-            private void CheckEyeBlink(float currentConfidence, float lastConfidence,
-                                      ref bool hasFallenBelowThreshold, ref bool blinkTriggered, bool isLeftEye)
-            {
-                // 检测置信度是否下降到阈值以下（可能开始眨眼）
-                if (currentConfidence < FALL_THRESHOLD)
-                {
-                    hasFallenBelowThreshold = true;
-                    blinkTriggered = false;
-                }
-                // 若已下降到阈值以下，且当前上升到阈值以上（眨眼结束）
-                else if (hasFallenBelowThreshold && currentConfidence > RISE_THRESHOLD && !blinkTriggered)
-                {
-                    // 根据左右眼触发不同鼠标事件
-                    if (isLeftEye)
-                    {
-                        WindowsInputSimulator.SimulateLeftClick();
-                        Debug.Log("左眼眨眼 - 触发鼠标左键点击");
-                    }
-                    else
-                    {
-                        WindowsInputSimulator.SimulateRightClick();
-                        Debug.Log("右眼眨眼 - 触发鼠标右键点击");
-                    }
 
-                    blinkTriggered = true;
-                    hasFallenBelowThreshold = false;
-                }
-            }
-
-            private void TriggerMouseClick()
+            /*private void TriggerMouseClick()
             {
                 WindowsInputSimulator.SimulateLeftClick();
                 Debug.Log("触发鼠标点击：置信度先低于30%后高于70%");
-            }
+            }*/
 
             private void CheckBlink(float currentConfidence, float lastConfidence,
                           ref bool hasFallenBelowThreshold, ref bool blinkTriggered, bool isLeftEye)
@@ -356,9 +329,9 @@ namespace Experica
                 {
                     // 记录当前眨眼时间
                     var currentBlinkTime = DateTime.Now;
-
                     // 检查是否与另一只眼的眨眼时间重叠
                     bool isSimultaneousBlink = false;
+                    
                     if (isLeftEye)
                     {
                         _leftBlinkTime = currentBlinkTime;
@@ -383,20 +356,23 @@ namespace Experica
                     // 只有非同时眨眼才触发鼠标事件
                     if (!isSimultaneousBlink)
                     {
-                        if (isLeftEye)
+                        var now = DateTime.Now;
+                        if (isLeftEye && now - _lastLeftBlinkTime >= _blinkIntervalMin)
                         {
-                            WindowsInputSimulator.SimulateLeftClick();
+                            LeftEyeBlinked();
+                            _lastLeftBlinkTime = now;
                             Debug.Log("左眼眨眼 - 触发鼠标左键点击");
                         }
                         else
                         {
-                            WindowsInputSimulator.SimulateRightClick();
+                            RightEyeBlinked();
+                            _lastRightBlinkTime = now;
                             Debug.Log("右眼眨眼 - 触发鼠标右键点击");
                         }
                     }
                     else
                     {
-                        Debug.Log("双眼同时眨眼 - 不触发鼠标操作");
+                        Debug.Log($"双眼同步眨眼（间隔：{Math.Round((currentBlinkTime - (isLeftEye ? _rightBlinkTime.Value : _leftBlinkTime.Value)).TotalMilliseconds)}ms）- 不触发操作");
                     }
 
                     blinkTriggered = true;

@@ -11,48 +11,49 @@ Subject_Birth: ''
 Subject_Size: 0 0 0
 Subject_Weight: 27
 Subject_Log: 
-EnvPath: Fixation
+EnvPath: FixationShowroom
 EnvParam:
-  FixDotPosition@FixDot@FixDot: 0 8 0
+  FixDotPosition@FixDot@FixDot: 0 -8 0
   FixDotDiameter@FixDot@FixDot: 2
   FixDotInnerRadius@FixDot@FixDot: 0.25
   FixDotOuterRadius@FixDot@FixDot: 0.5
   FixDotInnerColor@FixDot@FixDot: 0 0 0 1
   FixDotOuterColor@FixDot@FixDot: 1 1 1 1
   FixDotVisible@FixDot@FixDot: false
+  Show@Showroom@FixDot/Showroom: None
   CameraPosition@OrthoCamera@OrthoCamera: 0 0 -501
   ScreenToEye@OrthoCamera@OrthoCamera: 57
   ScreenHeight@OrthoCamera@OrthoCamera: 30
-  ScreenAspect@OrthoCamera@OrthoCamera: 2.495895
+  ScreenAspect@OrthoCamera@OrthoCamera: 2.285714
   BGColor@OrthoCamera@OrthoCamera: 0.5 0.5 0.5 1
   CLUT@OrthoCamera@OrthoCamera: true
   MarkerSize@Marker@OrthoCamera/Marker: 2
   MarkerCorner@Marker@OrthoCamera/Marker: BottomLeft
   Mark@Marker@OrthoCamera/Marker: false
-  TagSize@Tag@OrthoCamera/Tag0: 4
-  TagMargin@Tag@OrthoCamera/Tag0: 4
+  TagSize@Tag@OrthoCamera/Tag0: 5
+  TagMargin@Tag@OrthoCamera/Tag0: 6
   TagID@Tag@OrthoCamera/Tag0: tag25_09_00000
   TagCorner@Tag@OrthoCamera/Tag0: BottomLeft
-  TagSize@Tag@OrthoCamera/Tag1: 4
-  TagMargin@Tag@OrthoCamera/Tag1: 4
+  TagSize@Tag@OrthoCamera/Tag1: 5
+  TagMargin@Tag@OrthoCamera/Tag1: 6
   TagID@Tag@OrthoCamera/Tag1: tag25_09_00001
   TagCorner@Tag@OrthoCamera/Tag1: BottomRight
-  TagSize@Tag@OrthoCamera/Tag2: 4
-  TagMargin@Tag@OrthoCamera/Tag2: 4
+  TagSize@Tag@OrthoCamera/Tag2: 5
+  TagMargin@Tag@OrthoCamera/Tag2: 6
   TagID@Tag@OrthoCamera/Tag2: tag25_09_00002
   TagCorner@Tag@OrthoCamera/Tag2: TopRight
-  TagSize@Tag@OrthoCamera/Tag3: 4
-  TagMargin@Tag@OrthoCamera/Tag3: 4
+  TagSize@Tag@OrthoCamera/Tag3: 5
+  TagMargin@Tag@OrthoCamera/Tag3: 6
   TagID@Tag@OrthoCamera/Tag3: tag25_09_00003
   TagCorner@Tag@OrthoCamera/Tag3: TopLeft
 CondPath: ''
 Cond: 
-LogicPath: Fixation
+LogicPath: FixationCondTest
 Hemisphere: Left
 Eye: Both
 RecordSession: ''
 RecordSite: Full
-DataDir: D:/
+DataDir: X:/
 DataPath: 
 Input: true
 CondSampling: UniformWithoutReplacement
@@ -63,7 +64,7 @@ BlockFactor: []
 PreICI: 250
 CondDur: 300
 SufICI: 0
-PreITI: 746
+PreITI: 747
 TrialDur: 0
 SufITI: 1826
 PreIBI: 0
@@ -89,6 +90,8 @@ InheritParam:
   - Subject_Weight
   - RecordSession
   - BlockRepeat
+  - EnvPath
+  - LogicPath
 EnvInheritParam:
   - ScreenToEye@OrthoCamera@OrthoCamera
   - ScreenHeight@OrthoCamera@OrthoCamera

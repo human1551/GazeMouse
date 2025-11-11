@@ -24,7 +24,7 @@ EnvParam:
   CameraPosition@OrthoCamera@OrthoCamera: 0 0 -501
   ScreenToEye@OrthoCamera@OrthoCamera: 57
   ScreenHeight@OrthoCamera@OrthoCamera: 33
-  ScreenAspect@OrthoCamera@OrthoCamera: 1.775419
+  ScreenAspect@OrthoCamera@OrthoCamera: 2.285714
   BGColor@OrthoCamera@OrthoCamera: 0.5 0.5 0.5 1
   CLUT@OrthoCamera@OrthoCamera: true
   MarkerSize@Marker@OrthoCamera/Marker: 2
@@ -81,7 +81,7 @@ BlockFactor: []
 PreICI: 0
 CondDur: 500
 SufICI: 0
-PreITI: 629
+PreITI: 741
 TrialDur: 0
 SufITI: 1063
 PreIBI: 0

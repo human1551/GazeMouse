@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/IController/UKeyboard/keyboard.uss?fileID=7433441132597879392&amp;guid=a30c2d668562f4b418ff5d3c62116b8b&amp;type=3#keyboard" />
+    <ui:VisualElement class="keyboard-container">
+        <ui:VisualElement class="display-row">
+            <ui:Label name="display-text" class="display-text" />
+            <ui:Label name="preview-text" class="preview-text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="keyboard-grid" class="keyboard">
+            <ui:Button name="btn1" text="ABC" class="key-button" />
+            <ui:Button name="btn2" text="DEF" class="key-button" />
+            <ui:Button name="btn3" text="GHI" class="key-button" />
+            <ui:Button name="btn4" text="JKL" class="key-button" />
+            <ui:Button name="btn5" text="MNO" class="key-button" />
+            <ui:Button name="btn6" text="PQR" class="key-button" />
+            <ui:Button name="btn7" text="STU" class="key-button" />
+            <ui:Button name="btn8" text="VWX" class="key-button" />
+            <ui:Button name="btn9" text="YZ" class="key-button" />
+            <ui:Button name="btn-comma" text=",." class="key-button" />
+            <ui:Button name="btn-space" text="SPACE" class="key-button" />
+            <ui:Button name="btn-delete" text="DEL" class="key-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

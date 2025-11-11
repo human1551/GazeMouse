@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2879760467
+  GlobalObjectIdHash: 3646254559
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 5070186803506016424}
   - component: {fileID: 4660512660872090538}
   - component: {fileID: 4026307956702198693}
+  - component: {fileID: 4002840502646454428}
   m_Layer: 0
   m_Name: Tag2
   m_TagString: Untagged
@@ -409,7 +410,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4669269992282417371}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0489d04078f7e41a3cca6d6f5d20e4, type: 3}
   m_Name: 
@@ -423,6 +424,22 @@ MonoBehaviour:
     m_InternalValue: 0
   TagCorner:
     m_InternalValue: 3
+--- !u!114 &4002840502646454428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669269992282417371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfca721f743e5a4ea0393a1673ae862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Experica.Command::Experica.NetEnv.TagLocal
+  TagSize: 2
+  TagMargin: 2
+  TagID: 0
+  TagCorner: 3
 --- !u!1 &6340403300667138606
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +452,7 @@ GameObject:
   - component: {fileID: 1248673729249600365}
   - component: {fileID: 6021873474537713668}
   - component: {fileID: 214454615196719343}
+  - component: {fileID: 7262590200812743971}
   m_Layer: 0
   m_Name: Tag0
   m_TagString: Untagged
@@ -520,7 +538,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6340403300667138606}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0489d04078f7e41a3cca6d6f5d20e4, type: 3}
   m_Name: 
@@ -534,6 +552,22 @@ MonoBehaviour:
     m_InternalValue: 0
   TagCorner:
     m_InternalValue: 3
+--- !u!114 &7262590200812743971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6340403300667138606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfca721f743e5a4ea0393a1673ae862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Experica.Command::Experica.NetEnv.TagLocal
+  TagSize: 2
+  TagMargin: 2
+  TagID: 0
+  TagCorner: 3
 --- !u!1 &6493073807265104097
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +579,7 @@ GameObject:
   - component: {fileID: 4806912432333227165}
   - component: {fileID: 2433643712594149313}
   - component: {fileID: 7600366219940268048}
+  - component: {fileID: 422038884605017427}
   - component: {fileID: 8028804635866662428}
   m_Layer: 0
   m_Name: Tag1
@@ -624,7 +659,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8028804635866662428
+--- !u!114 &422038884605017427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -632,6 +667,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493073807265104097}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfca721f743e5a4ea0393a1673ae862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Experica.Command::Experica.NetEnv.TagLocal
+  TagSize: 2
+  TagMargin: 2
+  TagID: 0
+  TagCorner: 3
+--- !u!114 &8028804635866662428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493073807265104097}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0489d04078f7e41a3cca6d6f5d20e4, type: 3}
   m_Name: 
@@ -765,6 +816,7 @@ GameObject:
   - component: {fileID: 8131944744379777720}
   - component: {fileID: 2683508911701620052}
   - component: {fileID: 769508563239132505}
+  - component: {fileID: 4967115463200675152}
   - component: {fileID: 6620624264913243085}
   m_Layer: 0
   m_Name: Tag3
@@ -844,7 +896,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6620624264913243085
+--- !u!114 &4967115463200675152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -852,6 +904,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8805753029191343276}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfca721f743e5a4ea0393a1673ae862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Experica.Command::Experica.NetEnv.TagLocal
+  TagSize: 2
+  TagMargin: 2
+  TagID: 0
+  TagCorner: 3
+--- !u!114 &6620624264913243085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805753029191343276}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0489d04078f7e41a3cca6d6f5d20e4, type: 3}
   m_Name: 
