@@ -224,6 +224,7 @@ namespace Experica.NetEnv
         public float Height { get; }
         public float Width { get; }
         public float Aspect { get; }
+        
         public float NearPlane { get; }
         public float FarPlane { get; }
         public Action<INetEnvCamera> OnCameraChange { get; set; }

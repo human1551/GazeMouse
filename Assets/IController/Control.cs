@@ -43,18 +43,19 @@ public class Control : ExperimentLogic
     public double RandSufITIDur => RNG.Next(GetExParam<int>("MinSufITIDur"), GetExParam<int>("MaxSufITIDur"));
     public double RandFixDur => RNG.Next(GetExParam<int>("MinFixDur"), GetExParam<int>("MaxFixDur"));
 
-    [SerializeField] private KeyboardGazeHandler gazeHandler;
-    [SerializeField] private const float FALL_THRESHOLD = 0.2f;   // 置信度下降阈值
-    [SerializeField] private const float RISE_THRESHOLD = 0.7f;   // 置信度上升阈值
-    [SerializeField] private float fixationTriggerThreshold = 0.5f; // 注视触发阈值（秒）
+    //[SerializeField]不在inspector上显示，屈服了……
+    private List<Button> keyButtons = new List<Button>(); //只负责找到按键位置，不负责按键功能
+    private const float FALL_THRESHOLD = 0.2f;   // 置信度下降阈值
+    private const float RISE_THRESHOLD = 0.7f;   // 置信度上升阈值
+    private float fixationTriggerThreshold = 0.5f; // 注视触发阈值（秒）
 
     private enum GazeState { Disabled, Enabled }
     private GazeState currentGazeState = GazeState.Disabled;
     private Dictionary<Button, float> buttonGazeTimes = new();
-    private Button currentGazedButton; 
-    private bool _isGazeHandlerEnabled = false; 
-    private bool _isBlinkDetected = false;
-    private Button prevGazedButton;
+    private Button currentGazedButton;
+    //private bool _isGazeHandlerEnabled = false; //
+    //private bool _isBlinkDetected = false; //
+    //private Button prevGazedButton;
     private bool isLeftBlinkHandled = false;
 
 
@@ -71,24 +72,36 @@ public class Control : ExperimentLogic
     protected Vector3 fixdotposition;
     protected List<ScaleGrid> scalegrid = new();
     protected bool updatefixtrail, recordgaze;
-    TagLocal tag;
+    //TagLocal tag;
     DotTrailLocal fixtrail;
     Circle fixcircle;
     public GameObject tagPrefab; // 引用Tag预制体
+    INetEnvCamera mainCamera;
     //private Tag spawnedTag;
 
 
     protected override void Enable()
     {
         base.Enable();
-
-        if (gazeHandler != null)
+        var uiDocument = GameObject.Find("KeyboardUI")?.GetComponent<UIDocument>(); //键盘按钮是找到了的
+        if (uiDocument == null)
         {
-            InitGazeTracking();
+            return;
+        }
+        var root = uiDocument.rootVisualElement;
+        var keyButtonsFromUxml = root.Query<Button>()
+            .Where(btn => btn.ClassListContains("key-button"))
+            .ToList();
+        
+        keyButtons.Clear(); 
+        keyButtons.AddRange(keyButtonsFromUxml);
+        if (keyButtons != null && keyButtons.Count > 0)
+        {
+            InitGazeTracking(); 
         }
         else
         {
-            Debug.LogWarning("未关联KeyboardGazeHandler，注视交互功能禁用");
+            Debug.LogWarning("未添加键盘按钮，注视交互功能禁用");
         }
 
         MoveAction = InputSystem.actions.FindActionMap("Logic").FindAction("Move");
@@ -101,7 +114,7 @@ public class Control : ExperimentLogic
         }
     }
 
-    private void OnLeftEyeBlinked()
+    private void OnLeftEyeBlinked() //
     {
         if (currentGazeState == GazeState.Disabled)
         {
@@ -114,16 +127,17 @@ public class Control : ExperimentLogic
     {
         if (currentGazeState == GazeState.Enabled)
         {
-            ResetGazeState();
-            Debug.Log("右眼眨眼 - 退出注视交互");
+            //ResetGazeState();
+            //Debug.Log("右眼眨眼 - 退出注视交互");
         }
     }
 
     private void InitGazeTracking()
     {
         // 缓存所有按钮的初始注视时间
-        foreach (var btn in gazeHandler.KeyButtons)
+        foreach (var btn in keyButtons)
         {
+            if (btn == null) continue; 
             if (!buttonGazeTimes.ContainsKey(btn))
             {
                 buttonGazeTimes[btn] = 0;
@@ -145,7 +159,7 @@ public class Control : ExperimentLogic
             EyeTracker.Dispose();
             EyeTracker = null;
         }
-        
+
     }
     [SerializeField] public int targetCameraIndex = 0;
 
@@ -171,23 +185,23 @@ public class Control : ExperimentLogic
 
     private void Start()
     {
-        var cname = GameObject.Find("MainCamera"); //找到本地相机 
-        var tagObj = GameObject.Find($"{cname}/Tag0");
-        if (tagObj != null)
-        {
-            tag = tagObj.GetComponent<TagLocal>();
-            tagObj.SetActive(true);
+        mainCamera = GameObject.Find("TagMarkerOrthoCamera").GetComponent<INetEnvCamera>(); //找到本地相机 
+        //var tagObj = GameObject.Find($"{cname}/Tag0");
+        //if (tagObj != null)
+        //{
+        //    tag = tagObj.GetComponent<TagLocal>();
+        //    tagObj.SetActive(true);
 
 
-            //if (tag != null && tag.GetType().GetProperty("Visible") != null)
-            //{
-                //tag.GetType().GetProperty("Visible").SetValue(tag, true);
-            //}
-        }
-        else
-        {
-            Debug.LogWarning($"未在Hierarchy找到Tag，路径：{cname}/Tag0");
-        }
+        //    if (tag != null && tag.GetType().GetProperty("Visible") != null)
+        //    {
+        //        tag.GetType().GetProperty("Visible").SetValue(tag, true);
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogWarning($"未在Hierarchy找到Tag，路径：{cname}/Tag0");
+        //}
 
         var trailObj = GameObject.Find("DotTrail"); 
         if (trailObj != null)
@@ -211,8 +225,8 @@ public class Control : ExperimentLogic
     /// <summary>
     /// add helpful visual guides
     /// </summary>
-    public override void OnPlayerReady()
-    {
+    //public override void OnPlayerReady()
+    //{
         //Action<NetEnvVisual, Vector3> upxy = (o, p) => o.Position.Value = new(p.x, p.y, o.Position.Value.z);
         //本地有tagmarker和dottrail，find game object instead of spawn new ones
         //var fixradius = (float)ex.ExtendParam["FixRadius"];
@@ -223,7 +237,7 @@ public class Control : ExperimentLogic
         // tracing fixation position
         //fixtrail = envmgr.SpawnDotTrail(position: Vector3.back, size: new(0.25f, 0.25f, 1), color: new(1, 0.1f, 0.1f), parse: false); //find dottrail game object
       
-    }
+    //}
 
     //这个可以改成在在注视点上将注视时间可视化的进度条
     protected override void PrepareCondition()
@@ -252,56 +266,39 @@ public class Control : ExperimentLogic
         set
         {
             foreach (var sg in scalegrid) { sg.Visible.Value = value; }
-            if (fixcircle != null) { fixcircle.Visible.Value = value; }
-            if (fixtrail != null) { fixtrail.Visible.Value = value; }
+            if (fixcircle != null) {/* fixcircle.Visible.Value = value;*/fixcircle.gameObject.SetActive(value); }
+            if (fixtrail != null) { fixtrail.gameObject.SetActive(value); }
         }
     }
 
-    public override bool NetVisible
-    {
-        get
-        {
-            if (scalegrid.Count == 0) { return false; }
-            var sg = scalegrid.First();
-            return !sg.NetworkObject.IsNetworkHideFromAll();
-        }
-        set
-        {
-            foreach (var sg in scalegrid)
-            {
-                if (value) { sg.NetworkObject.NetworkShowOnlyTo(sg.ClientID); }
-                else { sg.NetworkObject.NetworkHideFromAll(); }
-            }
-            if (fixcircle != null) { fixcircle.NetworkObject.NetworkShowHideAll(value); }
-            if (fixtrail != null) { fixtrail.NetworkObject.NetworkShowHideAll(value); }
-        }
-    }
-
-    //检测一次眨眼完整模式
-    /*private void CheckBlinkPattern(float currentConfidence)
-    {
-        if (currentConfidence < FALL_THRESHOLD)
-        {
-            _hasFallenBelowThreshold = true;
-            _blinkTriggered = false;  // 重置触发状态
-            _isBlinkDetected = false; // 重置眨眼检测标记
-        }
-
-        else if (_hasFallenBelowThreshold && currentConfidence > RISE_THRESHOLD && !_blinkTriggered)
-        {
-            _isBlinkDetected = true; // 标记检测到一次完整眨眼
-            _blinkTriggered = true;  // 标记已触发，避免重复
-            _hasFallenBelowThreshold = false;  // 重置状态
-        }
-    }*/
+    //public override bool NetVisible
+    //{
+    //    get
+    //    {
+    //        if (scalegrid.Count == 0) { return false; }
+    //        var sg = scalegrid.First();
+    //        return !sg.NetworkObject.IsNetworkHideFromAll();
+    //    }
+    //    set
+    //    {
+    //        foreach (var sg in scalegrid)
+    //        {
+    //            if (value) { sg.NetworkObject.NetworkShowOnlyTo(sg.ClientID); }
+    //            else { sg.NetworkObject.NetworkHideFromAll(); }
+    //        }
+    //        if (fixcircle != null) { fixcircle.NetworkObject.NetworkShowHideAll(value); }
+    //        if (fixtrail != null) { fixtrail.NetworkObject.NetworkShowHideAll(value); }
+    //    }
+    //}
 
 
-    protected override void OnUpdate()
+    [SerializeField][Min(0)] private float surfaceMargin = 5f; //继续调整surfaceMargin
+    protected override void OnUpdate() //Onupdate里完全没有用到GazeState
     {
         base.OnUpdate();
 
-        //无眼动仪/脚本时重置注视状态并退出
-        if (/*TrialState != TRIALSTATE.TRIAL ||*/ EyeTracker == null || gazeHandler == null)
+
+        if (/*TrialState != TRIALSTATE.TRIAL ||*/ EyeTracker == null)
         {
             ResetGazeState();
             return;
@@ -310,46 +307,45 @@ public class Control : ExperimentLogic
         var currentConfidence = EyeTracker.Confidence;
 
         var normalizedGaze = EyeTracker.Gaze2D;
+       // normalizedGaze.x = 1.0f - normalizedGaze.x;
+        normalizedGaze.y = 1.0f - normalizedGaze.y;
+        Debug.Log($"原始 Gaze2D: X={normalizedGaze.x:F3}, Y={normalizedGaze.y:F3}");
+        //float surfaceMargin = tag.TagSurfaceMargin;
         Vector2 screenGazePos = Vector2.zero;
-        if (envmgr.MainCamera != null && envmgr.MainCamera.Any() && tag != null)
+        screenGazePos = surfacegaze2cameragaze(normalizedGaze, mainCamera, surfaceMargin);
+        var newGazedButton = GetCurrentGazedButton(screenGazePos, mainCamera, surfaceMargin); //注视点在按钮上的时候发送hover，注视点离开按钮发送leave
+
+        if (newGazedButton != currentGazedButton) //改成fixtrail位置和按钮位置?
         {
-            var mainCamera = envmgr.MainCamera.First();
-            screenGazePos = surfacegaze2cameragaze(normalizedGaze, mainCamera, tag.TagSurfaceMargin);
-        }
-        currentGazedButton = gazeHandler.GetGazedButton(screenGazePos); //不用gazehandeler可以转换吗 
-
-        //var screenGazePos = ConvertGazeToScreen(normalizedGaze);
-        //currentGazedButton = gazeHandler.GetGazedButton(screenGazePos);
-
-        //DetectBlink(currentConfidence);
-
-        if (currentGazedButton != prevGazedButton)
-        {
-            if (prevGazedButton != null)
-            {
-                prevGazedButton.SendEvent(new PointerLeaveEvent());
-            }
             if (currentGazedButton != null)
             {
-                currentGazedButton.SendEvent(new PointerEnterEvent());
+                currentGazedButton.SendEvent(new PointerLeaveEvent());
             }
-            prevGazedButton = currentGazedButton;
+
+            if (newGazedButton != null)
+            {
+                newGazedButton.SendEvent(new PointerEnterEvent());
+            }
+
+            currentGazedButton = newGazedButton;
         }
 
-        // 处理注视计时
+
+
+        //处理注视计时（这个需要处理吗？KeyboardController里有）
         if (currentGazeState == GazeState.Enabled)
         {
             UpdateGazeTimer(EyeTracker.Confidence);
         }
 
-        // 在屏幕任意位置眨左眼，启用注视交互
-        if (_isBlinkDetected && currentGazedButton != null)
-        {
-            currentGazeState = GazeState.Enabled;
-            _isBlinkDetected = false;
-            Debug.Log($"检测到按键上眨左眼，启用注视交互（目标：{currentGazedButton.name}）");
+        ////在屏幕任意位置眨左眼，启用注视交互 看起来没用但注释掉会出问题
+        //if (_isBlinkDetected)
+        //{
+        //    currentGazeState = GazeState.Enabled;
+        //    _isBlinkDetected = false;
+        //    Debug.Log($"检测到任意位置眨左眼，启用注视交互");
 
-        }
+        //}
 
         if (currentGazeState == GazeState.Enabled)
         {
@@ -357,16 +353,16 @@ public class Control : ExperimentLogic
         }
         _lastConfidence = currentConfidence;
 
-        if (ex.Input && envmgr.MainCamera.Count > 0 && MoveAction.phase == InputActionPhase.Started)
-        {
-            FixPosition += MoveAction.ReadValue<Vector2>();
-            clampMove(ref FixPosition);
-            updatefixtrail = true;
-        }
+        //if (ex.Input && /*envmgr.MainCamera.Count > 0*/mainCamera != null && MoveAction.phase == InputActionPhase.Started)
+        //{
+        //    FixPosition += MoveAction.ReadValue<Vector2>();
+        //    clampMove(ref FixPosition);
+        //    updatefixtrail = true;
+        //}
 
-        if (EyeTracker != null && envmgr.MainCamera.Count > 0)
+        if (EyeTracker != null && mainCamera != null)
         {
-            FixPosition = surfacegaze2cameragaze(EyeTracker.Gaze2D, envmgr.MainCamera.First(), tag.TagSurfaceMargin);
+            FixPosition = surfacegaze2cameragaze(EyeTracker.Gaze2D, /*envmgr.MainCamera.First()*/mainCamera, surfaceMargin); //envmgr.MainCamera.First()相关改掉
             if (recordgaze && ex.HasCondTestState())
             {
                 condtestmgr.AddInList(nameof(CONDTESTPARAM.Gaze), TimeMS, FixPosition);
@@ -374,48 +370,56 @@ public class Control : ExperimentLogic
             updatefixtrail = true;
         }
 
-        if (updatefixtrail && fixtrail != null && fixtrail.Visible.Value)
+        if (updatefixtrail && fixtrail != null /*&& fixtrail.Visible.Value*/)
         {
             fixtrail.Position = FixPosition;
             updatefixtrail = false;
         }
     }
 
-    private Vector2 GetButtonPositionViaGazeConverter(VisualElement button, INetEnvCamera camera, float surfacemargin)
+    private Vector2 ButtonPositionConverter(VisualElement button, INetEnvCamera camera, float surfacemargin)
     {
-        // 1. 获取按钮在UI中的世界坐标边界（包含中心位置）
-        Rect buttonBounds = button.worldBound;
-        Vector2 buttonCenter = buttonBounds.center; // 按钮中心的UI坐标（像素级）
+        Rect buttonWorldBounds = button.worldBound;
+        return buttonWorldBounds.center;
+    }
+    //private Vector2 ButtonPositionConverter(VisualElement button, INetEnvCamera camera, float surfacemargin) //键盘转换成world space了这里的坐标转换函数要改动吗
+    //{
 
-        // 2. 计算相机有效区域（去除边距后的宽高）
+    //    // 1. 获取按钮在UI中的世界坐标边界（包含中心位置）
+    //    Rect buttonBounds = button.worldBound;
+    //    Vector2 buttonCenter = buttonBounds.center; // 按钮中心的UI坐标（像素级）
+
+    //    // 2. 计算相机有效区域（去除边距后的宽高）
+    //    float effectiveWidth = camera.Width - 2 * surfacemargin;
+    //    float effectiveHeight = camera.Height - 2 * surfacemargin;
+
+    //    // 3. 归一化到 [0,1] 范围，翻转轴
+    //    float normalizedX = buttonCenter.x / effectiveWidth;
+    //    float normalizedY = buttonCenter.y / effectiveHeight; 
+
+    //    // 用现有方法将键盘按钮的归一化坐标转换为相机坐标
+    //    return surfacegaze2cameragaze(new Vector2(normalizedX, normalizedY), camera, surfacemargin);
+    //}
+
+    //将归一化坐标转换为屏幕坐标（边界，小区域）
+    Vector2 surfacegaze2cameragaze(Vector2 sg, INetEnvCamera camera, float surfacemargin) 
+    {
+        //sg.x = sg.x - 0.5f;
+        //sg.y = sg.y - 0.5f;
+        //return new Vector2(sg.x * (camera.Width - 2 * surfacemargin), sg.y * (camera.Height - 2 * surfacemargin));
+        Debug.Log($"camera.Height: {camera.Height}, camera.Width: {camera.Width}");
         float effectiveWidth = camera.Width - 2 * surfacemargin;
         float effectiveHeight = camera.Height - 2 * surfacemargin;
 
-        // 3. 将按钮中心坐标归一化到 [0,1] 范围（相对于相机有效区域）
-        // 注意：UI坐标Y轴可能与相机坐标Y轴方向相反（如UI Y向下，相机Y向上），需翻转
-        float normalizedX = buttonCenter.x / effectiveWidth;
-        float normalizedY = 1 - (buttonCenter.y / effectiveHeight); // 翻转Y轴（根据实际情况调整）
+        // 2. 计算相对于视口中心的偏移量（世界单位）
+        float offsetX = (sg.x - 0.5f) * effectiveWidth;
+        float offsetY = (sg.y - 0.5f) * effectiveHeight;
 
-        // 4. 用现有方法转换为目标坐标
-        return surfacegaze2cameragaze(new Vector2(normalizedX, normalizedY), camera, surfacemargin);
-    }
-
-    //归一化坐标转换成屏幕坐标（全屏）
-    /*private Vector2 ConvertGazeToScreen(Vector2 normalizedGaze)
-    {
-
-        float x = normalizedGaze.x * Screen.width;
-        float y = normalizedGaze.y * Screen.height;
-
-        // 翻转Y轴（UI Toolkit屏幕坐标Y轴向下）
-        return new Vector2(x, Screen.height - y);
-    }*/
-    //将归一化坐标转换为屏幕坐标（边界，小区域）用哪一个？
-    Vector2 surfacegaze2cameragaze(Vector2 sg, INetEnvCamera camera, float surfacemargin) //将归一化坐标转换为屏幕坐标（边界，小区域）
-    {
-        sg.x = sg.x - 0.5f;
-        sg.y = sg.y - 0.5f;
-        return new Vector2(sg.x * (camera.Width - 2 * surfacemargin), sg.y * (camera.Height - 2 * surfacemargin));
+        // 3. 将偏移量加到相机的世界位置上，得到最终的世界坐标
+        Vector3 worldPos = Vector3.zero;
+        worldPos.x += offsetX;
+        worldPos.y += offsetY;
+        return worldPos;
     }
 
     void clampMove(ref Vector2 pos)
@@ -426,20 +430,61 @@ public class Control : ExperimentLogic
         pos.y = Mathf.Clamp(pos.y, -r, r);
     }
 
-   // protected virtual bool FixOnTarget => Vector2.Distance(fixdotposition.Value, FixPosition) < (float)ex.ExtendParam["FixRadius"];
-
-
-    /*private void DetectBlink(float currentConfidence)
+    private Button _previousHitButton;
+    private Button GetCurrentGazedButton(Vector2 fixWorldPos, INetEnvCamera mainCamera, float surfaceMargin)
     {
-        if (_lastConfidence < 0) return; // 初始帧不检测
-
-        // 置信度从"低于下降阈值"跳变到"高于上升阈值" → 判定为眨眼结束
-        if (_lastConfidence <= FALL_THRESHOLD && currentConfidence > RISE_THRESHOLD)
+        Button hitButton = null;  //hitBButton为什么一直是null？
+        float minDistance = float.MaxValue; // 记录最小距离（优先命中最近的按钮）
+        
+        foreach (var button in keyButtons) //手动添加
         {
-            _isBlinkDetected = true;
-        }
-    }*/
+            if (button == null) continue;
 
+            Vector2 buttonWorldPos = ButtonPositionConverter(button, mainCamera, surfaceMargin);
+            //用fixtrail？
+            //Vector3 fixPosWithZ = new Vector3(FixPosition.x, FixPosition.y, mainCamera.NearPlane);
+            //Vector2 fixWorldPos = mainCamera.Camera.ScreenToWorldPoint(fixPosWithZ); // 转换为世界单位
+            Rect buttonBounds = button.worldBound;
+            //Vector3 buttonWorldCenter = buttonBounds.center; // 转 Vector3（WorldToScreenPoint 需 Z 轴）
+            //Vector3 buttonScreenPos3D = mainCamera.Camera.WorldToScreenPoint(buttonWorldCenter);
+            //Vector2 buttonScreenPos = new Vector2(buttonScreenPos3D.x, buttonScreenPos3D.y); // 转 Vector2
+            Vector2 realButtonCenter = buttonBounds.center; // 按钮真实世界中心（World Space）
+            Vector2 convertedCenter = ButtonPositionConverter(button, mainCamera, surfaceMargin); // 转换后坐标
+
+            // 打印对比：两者应基本一致（误差 < 0.1，否则转换逻辑错了）
+            Debug.Log($"按钮：{button.name} | 真实中心：{realButtonCenter} | 转换后：{convertedCenter}");
+            //float hitRadius = Mathf.Max(buttonBounds.width, buttonBounds.height) / 0.8f;
+            float hitRadius = buttonBounds.size.magnitude / 2f * 0.8f;
+            // 计算注视点到按钮中心的距离
+            float distance = Vector2.Distance(fixWorldPos, buttonWorldPos);
+
+            Debug.Log($"按钮：{button.name} | 按钮世界中心：{buttonWorldPos} | 注视点：{fixWorldPos}");
+            Debug.Log($"距离：{distance:F2} | 命中半径：{hitRadius:F2} | 距离是否达标：{distance <= hitRadius}");
+            // 找到距离最近且命中的按钮
+            if (distance <= hitRadius && distance < minDistance)
+            {
+                minDistance = distance;
+                hitButton = button; //到这里了hitButton也是null
+            }
+        }
+        //if (hitButton != _previousHitButton) //跟上面的重复了，但是怎么都没有用……
+        //{
+        //    _previousHitButton?.SendEvent(new PointerLeaveEvent()); 
+        //    hitButton?.SendEvent(new PointerEnterEvent());  //卡在这了？
+        //    _previousHitButton = hitButton;
+        //}
+        return hitButton;
+    }
+
+    //if(hitButton != null)
+    //hitButton.SendEvent(ButtonHoverEvent? ButtonEnterEvent?)
+    //if(hitButton = null)   //previousHitButton = hitButton,放在哪？
+    //previousHitButton.SendEvent(ButtonLeaveEvent)
+
+
+    protected virtual bool FixOnTarget => Vector2.Distance(fixdotposition, FixPosition) < (float)ex.ExtendParam["FixRadius"];
+
+    //这是啥时候的代码了……算了先放着
     private void UpdateGazeTimer(float confidence)
     {
         // 低置信度或无注视目标时，重置计时
@@ -466,7 +511,7 @@ public class Control : ExperimentLogic
         {
 
             //btn.clicked?.Invoke();
-            TriggerButtonClick(btn);
+            TriggerButtonClick(btn); //虽然有重复调用风险但实际上这个代码用没用上我不好说
             Debug.Log($"自动点击按钮：{btn.name}（注视时间：{fixationTriggerThreshold}秒）");
         }
     }
@@ -483,7 +528,7 @@ public class Control : ExperimentLogic
     {
         currentGazeState = GazeState.Disabled;
         currentGazedButton = null;
-        foreach (var btn in buttonGazeTimes.Keys)
+        foreach (var btn in buttonGazeTimes.Keys.ToList())
         {
             buttonGazeTimes[btn] = 0;
         }
@@ -498,7 +543,7 @@ public class Control : ExperimentLogic
             Debug.Log("检测到眨右眼，退出输入模式");
         }
     }
-     
+
 
     public enum TASKSTATE
     {

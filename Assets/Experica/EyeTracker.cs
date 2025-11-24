@@ -87,8 +87,8 @@ namespace Experica
             private bool _leftBlinkTriggered = false;
             private bool _rightBlinkTriggered = false;
 
-            public event Action LeftEyeBlinked;
-            public event Action RightEyeBlinked;
+            public event Action LeftEyeBlinked; //
+            public event Action RightEyeBlinked;//
             private DateTime _lastLeftBlinkTime = DateTime.MinValue;
             private DateTime _lastRightBlinkTime = DateTime.MinValue;
             private DateTime? _leftBlinkTime = null;
@@ -198,31 +198,22 @@ namespace Experica
             }
 
             // 置信度阈值
-            private const float FALL_THRESHOLD = 0.3f;   // 下降阈值：30%
-            private const float RISE_THRESHOLD = 0.7f;   // 上升阈值：70%
-            private bool _hasFallenBelowThreshold = false;  // 标记是否已下降到30%以下
-            private bool _triggered = false;  // 标记是否已触发过点击（避免重复触发）
-
-            /// <summary>
-            /// 当置信度上升时触发
-            /// </summary>
-            /// <param name="current">当前置信度</param>
-            /// <param name="previous">上一次置信度</param>
+            private const float FALL_THRESHOLD = 0.2f;   
+            private const float RISE_THRESHOLD = 0.8f;  
+            private bool _hasFallenBelowThreshold = false;  // 标记是否已下降到下降阈值以下
+            private bool _triggered = false; 
+            
+            // 置信度上升和下降是正常运行的
             private void OnConfidenceRising(float current, float previous)
             {
-                Debug.Log($"置信度上升: {previous:F2} → {current:F2}");
+                //Debug.Log($"置信度上升: {previous:F2} → {current:F2}");
             }
 
-            /// <summary>
-            /// 当置信度下降时触发
-            /// </summary>
-            /// <param name="current">当前置信度</param>
-            /// <param name="previous">上一次置信度</param>
             private void OnConfidenceFalling(float current, float previous)
             {
-                Debug.Log($"置信度下降: {previous:F2} → {current:F2}");
+                //Debug.Log($"置信度下降: {previous:F2} → {current:F2}");
             }
-            
+
             /*private void CheckConfidenceSequence(float currentConfidence)
             {
                 // 第一步：检测是否下降到30%以下
@@ -309,14 +300,8 @@ namespace Experica
 
 
 
-            /*private void TriggerMouseClick()
-            {
-                WindowsInputSimulator.SimulateLeftClick();
-                Debug.Log("触发鼠标点击：置信度先低于30%后高于70%");
-            }*/
-
             private void CheckBlink(float currentConfidence, float lastConfidence,
-                          ref bool hasFallenBelowThreshold, ref bool blinkTriggered, bool isLeftEye)
+                          ref bool hasFallenBelowThreshold, ref bool blinkTriggered, bool isLeftEye)  //不能这么判断……眼一直眨…… //为什么我只开了左眼，它却时不时闪一下检测到右眼眨眼？
             {
                 // 检测置信度是否下降到阈值以下（可能开始眨眼）
                 if (currentConfidence < FALL_THRESHOLD)
@@ -331,7 +316,7 @@ namespace Experica
                     var currentBlinkTime = DateTime.Now;
                     // 检查是否与另一只眼的眨眼时间重叠
                     bool isSimultaneousBlink = false;
-                    
+
                     if (isLeftEye)
                     {
                         _leftBlinkTime = currentBlinkTime;
@@ -379,7 +364,7 @@ namespace Experica
                     hasFallenBelowThreshold = false;
                 }
             }
-            void receivegaze(CancellationToken token)
+            void receivegaze(CancellationToken token) //正常运行
             {
                 var msg = new NetMQMessage();
                 string topic;
@@ -397,7 +382,7 @@ namespace Experica
                             payload = msg[1].ToByteArray();
                             payloadDict = MsgPack.DeserializeMsgPack<Dictionary<string, object>>(payload);
 
-                            // 处理瞳孔数据，区分左右眼
+                            //处理瞳孔数据，区分左右眼
                             if (topic.StartsWith("pupil.1.2d"))  // 左眼
                             {
                                 HandleEyeData(payloadDict, true);
@@ -406,7 +391,7 @@ namespace Experica
                             {
                                 HandleEyeData(payloadDict, false);
                             }
-                            else if (payloadDict.ContainsKey("gaze_on_surfaces"))
+                            if (payloadDict.ContainsKey("gaze_on_surfaces"))
                             {
                                 foreach (var gazeObj in payloadDict["gaze_on_surfaces"].AsList())
                                 {
